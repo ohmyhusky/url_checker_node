@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { processFile } = require("./helper/log_helper");
+const { processFile } = require("../helper/log_helper");
 
 const express = require("express");
 const app = express();
