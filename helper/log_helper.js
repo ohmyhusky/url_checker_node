@@ -1,3 +1,40 @@
+const processFile = (content) => {
+  // Get all ips from log
+  const IPs = content
+    .map((item) => item.split(" - ", 1)[0])
+    .filter((item) => item !== "");
+  // Get all urls from log
+  const urls = content.map((item) => {
+    return getURL(item);
+  });
+
+  // Get urls Count
+  const UrlsCount = getItemCount(urls, "visited");
+  // Get IPs Count
+  const IPsCount = getItemCount(IPs, "active");
+  // Get uniqueIPs
+  let uniqueIPs = [];
+  // Get topThreeURLs
+  let topThreeURLs = findBigItems(UrlsCount, 3, "visited");
+  // Get topThreeIPs
+  let topThreeIPs = findBigItems(IPsCount, 3, "active");
+
+  IPsCount.map((ip) => {
+    if (ip.active === 1) {
+      uniqueIPs.push(ip.key);
+    }
+  });
+
+  return {
+    UrlsCount,
+    IPsCount,
+    topThreeURLs,
+    topThreeIPs,
+    uniqueIPs,
+    uniqueIPsCount: uniqueIPs.length,
+  };
+};
+
 const getURL = (str) => {
   if (str !== "") {
     const res = str.match(/"(.*?)"/)[1].split(" ")[1];
@@ -33,56 +70,21 @@ const getItemCount = (array, type) => {
   return result.filter((x) => x.key !== null);
 };
 
-const findBigItems = (inp, count) => {
+const findBigItems = (inp, count, key) => {
   let outp = [];
   for (let i = 0; i < inp.length; i++) {
     outp.push(inp[i]); // add item to output array
     if (outp.length > count) {
       outp.sort((a, b) => {
-        return b.value - a.value;
+        return b[key] - a[key];
       }); // descending sort the output array
+
       outp.pop(); // remove the last index (index of smallest element in output array)
     }
   }
 
+  console.log(outp);
   return outp;
-};
-
-const processFile = (content) => {
-  // Get all ips from log
-  const IPs = content
-    .map((item) => item.split(" - ", 1)[0])
-    .filter((item) => item !== "");
-  // Get all urls from log
-  const urls = content.map((item) => {
-    return getURL(item);
-  });
-
-  // Get urls Count
-  const UrlsCount = getItemCount(urls, "visited");
-  // Get IPs Count
-  const IPsCount = getItemCount(IPs, "active");
-  // Get uniqueIPs
-  let uniqueIPs = [];
-  // Get topThreeURLs
-  let topThreeURLs = findBigItems(UrlsCount, 3);
-  // Get topThreeIPs
-  let topThreeIPs = findBigItems(IPsCount, 3);
-
-  IPsCount.map((ip) => {
-    if (ip.active === 1) {
-      uniqueIPs.push(ip.key);
-    }
-  });
-
-  return {
-    UrlsCount,
-    IPsCount,
-    topThreeURLs,
-    topThreeIPs,
-    uniqueIPs,
-    uniqueIPsCount: uniqueIPs.length,
-  };
 };
 
 module.exports = {

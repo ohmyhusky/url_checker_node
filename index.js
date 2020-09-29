@@ -13,7 +13,7 @@ fs.readFile("./data/programming-task-example-data.log", "utf8", function (
   if (err) {
     throw err;
   }
-  console.log(processFile(data.split(/\n/)));
+  // console.log(processFile(data.split(/\n/)));
   resultArray = processFile(data.split(/\n/));
 });
 

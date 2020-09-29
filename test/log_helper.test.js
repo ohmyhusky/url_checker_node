@@ -68,7 +68,7 @@ test("get final result from one array logs", () => {
       { key: "/faq", visited: 1 },
       { key: "/intranet-analytics", visited: 1 },
     ],
-    uniqueIPs: [],
-    uniqueIPsCount: 0,
+    uniqueIPs: ["168.41.191.40", "177.71.128.21"],
+    uniqueIPsCount: 2,
   });
 });
