@@ -39,7 +39,7 @@ test("get item count as array from log data", () => {
 });
 
 test("get the top 3 largest items from one array", () => {
-  expect(findBigItems(arr, 3)).toEqual([
+  expect(findBigItems(arr, 3, "value")).toEqual([
     { key: "e", value: 100 },
     { key: "c", value: 18 },
     { key: "d", value: 18 },
@@ -47,7 +47,7 @@ test("get the top 3 largest items from one array", () => {
 });
 
 test("get the top 1 largest items from one array", () => {
-  expect(findBigItems(arr, 1)).toEqual([{ key: "e", value: 100 }]);
+  expect(findBigItems(arr, 1, "value")).toEqual([{ key: "e", value: 100 }]);
 });
 
 test("get final result from one array logs", () => {
