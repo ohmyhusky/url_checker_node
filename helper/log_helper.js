@@ -37,6 +37,7 @@ const processFile = (content) => {
 
 const getURL = (str) => {
   if (str !== "") {
+    // const res = str.split('"')[1].split(' ')[1];   // this method is also works
     const res = str.match(/"(.*?)"/)[1].split(" ")[1];
     if (res.includes("http")) {
       const resWithDomain = new URL(res).pathname.split("/")[1];
