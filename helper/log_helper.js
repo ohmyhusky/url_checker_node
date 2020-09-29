@@ -65,14 +65,12 @@ const processFile = (content) => {
   // Get uniqueIPs
   let uniqueIPs = [];
   // Get topThreeURLs
-  console.log(UrlsCount);
   let topThreeURLs = findBigItems(UrlsCount, 3);
-  console.log(topThreeURLs);
   // Get topThreeIPs
   let topThreeIPs = findBigItems(IPsCount, 3);
 
   IPsCount.map((ip) => {
-    if (ip.value === 1) {
+    if (ip.active === 1) {
       uniqueIPs.push(ip.key);
     }
   });
